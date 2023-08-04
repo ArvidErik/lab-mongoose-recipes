@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const Recipe = require("./models/Recipe.model");
 // Import of the data from './data.json'
 const data = require("./data");
+const secret = require("./credentials")
 
-const MONGODB_URI =
-  "mongodb+srv://ArvidErik:Arvider@cluster0.8oaqccm.mongodb.net/MyFirstDatabase";
+const MONGODB_URI = secret;
 
 // Connection to the database "recipe-app"
 mongoose
@@ -34,7 +34,6 @@ mongoose
   })
   .catch((err) => console.log("error with the pancake", err))
 
-
   // INSERT MANY RECEPIES
   .then(async () => {
     await Recipe.insertMany(data);
@@ -47,7 +46,6 @@ mongoose
   })
   .catch((err) => console.log("error with creation many", err))
 
-
   // UPDATE RIGATONI
   .then(async () => {
     const query = { title: "Rigatoni alla Genovese" };
@@ -58,7 +56,6 @@ mongoose
   })
   .catch((err) => console.log(err))
 
-
   //DELETE CARROT CAKE
   .then(async () => {
     await Recipe.deleteOne({ title: "Carrot Cake" });
@@ -67,7 +64,6 @@ mongoose
     console.log("Carrotcake has been deleted");
   })
   .catch((err) => console.log(err))
-
 
   //CONNECTION ERROR
   .catch((error) => {
